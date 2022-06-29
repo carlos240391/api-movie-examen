@@ -19,6 +19,10 @@ const movieSchema = Schema({
         type:String,
         required:[true, "El campo poster es obligatorio"]
     },
+    banner:{
+        type:String,
+        required:[true, 'El campo banner es obligatorio']
+    },
     sinopsis:{
         type:String,
         required:[true, "El campo sinopsis es obligatorio"]
