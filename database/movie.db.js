@@ -27,6 +27,10 @@ const movieSchema = Schema({
         type:String,
         required:[true, "El campo sinopsis es obligatorio"]
     },
+    genero:{
+        type:String,
+        required:[true, "El campo genero es obligatorio"]
+    },
     idiomas:{
         type:[String],
     },
