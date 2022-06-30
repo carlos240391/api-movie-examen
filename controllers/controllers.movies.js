@@ -40,13 +40,58 @@ const getEachMovie = (req=request, res=response) =>{
 }
 
 const getRatingMovies = (req=request, res=response)=>{
-    Movies.find({}).sort({demand:'desc'}).exec((err,docs)=>{
+    Movies.find({}).sort({demand:'desc'}).limit(5).exec((err,docs)=>{
         if(err){
             res.json({mensaje:'Algo salio mal', folio:18725})
         }else{
-            res.json({mensaje:'Operacion exitosa', folio:18625, data:docs.slice(0,5)});
+            res.json({mensaje:'Operacion exitosa', folio:18625, data:docs});
         }
     })
+}
+
+const getLastMovie = (req=request, res=response) =>{
+    Movies.find({}).exec((err, docs)=>{
+        if(err){
+            res.json({mensaje:'Algo salio mal', folio:18725})
+        }else{
+            res.json({mensaje:'Operacion exitosa', folio:18625, data:docs[docs.length - 1]});
+        }
+    })
+}
+const getCategoriesMovies = (req=request, res=response) =>{
+    const category = req.query.category;
+    Movies.find({genero:category}, (err, docs)=>{
+        if(err){
+            res.json({mensaje:'Algo salio mal', folio:18725})
+        }else{
+            res.json({mensaje:'Operacion exitosa', folio:18625, data:docs});
+        }
+    })
+}
+
+const getFilterMovies = (req=request, res=response) =>{
+    const parametro = req.query.parametro;
+
+    const regex = new RegExp(parametro, 'i');
+    Movies.find({
+        $or:[
+            {genero:{$eq:parametro}},
+            {movieName:regex}
+        ]
+    }).exec((err, docs)=>{
+        if(err){
+            res.json({mensaje:'Algo salio mal', folio:18725})
+        }else{
+            res.json({mensaje:'Operacion exitosa', folio:18625, data:docs});
+        }
+    })
+    // Movies.find({$or:[{genero:{$eq:parametro}},{movieName:{$regex: parametro}}]}, (err, docs)=>{
+    //     if(err){
+    //         res.json({mensaje:'Algo salio mal', folio:18725})
+    //     }else{
+    //         res.json({mensaje:'Operacion exitosa', folio:18625, data:docs});
+    //     }
+    // })
 }
 
 const putMovie = async(req=request, res=response)=>{
@@ -110,6 +155,9 @@ module.exports = {
     getMovies,
     getRatingMovies,
     getEachMovie,
+    getLastMovie,
+    getCategoriesMovies,
+    getFilterMovies,
 
     postPlanes,
     getPlanes
