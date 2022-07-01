@@ -20,6 +20,10 @@ const rentaSchema = Schema({
         type:String,
         required:[true, 'La fecha de inicio de renta es obligatorio.'],
     }
+    email:{
+        type:String,
+        required:[true, 'El campo email es requerido.']
+    }
 })
 
 

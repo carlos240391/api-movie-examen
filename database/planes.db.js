@@ -15,6 +15,7 @@ const rentaSchema = Schema({
         type:String,
         required:[true, 'La descripcion es obligatoria.']
     }
+   
 })
 
 module.exports = model('Plan', rentaSchema);
