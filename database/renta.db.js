@@ -4,7 +4,7 @@ const {Schema, model} = require('mongoose');
 
 const rentaSchema = Schema({
     orden:{
-        type:Number,
+        type:String,
         required:[true, 'La orden es obligatoria.'],
         unique:true
     },
