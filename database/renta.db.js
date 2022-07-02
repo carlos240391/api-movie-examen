@@ -9,7 +9,7 @@ const rentaSchema = Schema({
         unique:true
     },
     movieId:{
-        type:Number,
+        type:String,
         required:[true, 'El ID de la pelicula es obligatorio.'],
     },
     plan:{
